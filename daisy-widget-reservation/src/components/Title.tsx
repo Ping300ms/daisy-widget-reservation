@@ -1,7 +1,7 @@
 function Title() {
     return (
         <div>
-            <p>test ok ok ok ok</p>
+            <p className="text-yellow-300">test ok ok ok ok</p>
         </div>
     );
 }

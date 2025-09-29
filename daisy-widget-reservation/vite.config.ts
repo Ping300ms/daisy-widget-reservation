@@ -12,7 +12,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        entryFileNames: "daisy-widget.js",
+        entryFileNames: "daisy-widget-reservation.js",
       },
     },
     outDir: "public",
