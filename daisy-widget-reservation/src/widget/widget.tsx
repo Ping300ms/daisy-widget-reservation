@@ -2,9 +2,14 @@ import { createRoot } from "react-dom/client";
 import App from "../App";
 import "../index.css";
 
+
+interface DaisyWidgetAPI {
+    init: (selector?: string) => void;
+}
+
 declare global {
     interface Window {
-        DaisyWidget?: any;
+        DaisyWidget?: DaisyWidgetAPI;
     }
 }
 

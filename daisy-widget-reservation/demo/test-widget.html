@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daisy Widget Test</title>
+    <title>Ateliers Créatifs – Daisy</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fichier CSS généré par ton widget -->
     <link rel="stylesheet" href="../public/daisy-widget-reservation.css">
 </head>
 <body>
-<div id="daisy-widget"></div>
+<!-- Header -->
+<header class="site-header">
+    <h1>Les Ateliers Créatifs de Daisy</h1>
+    <p>Explorez la peinture, la sculpture et la photo avec nos artistes passionnés.</p>
+</header>
 
+<!-- Section de présentation -->
+<section class="intro">
+    <img src="atelier.jpg" alt="Atelier artistique" class="hero-image">
+    <p>
+        Participez à nos ateliers artistiques uniques à Paris.
+        Choisissez un créneau, réservez votre place et laissez libre cours à votre créativité !
+    </p>
+</section>
+
+<!-- Widget Daisy -->
+<section class="reservation">
+    <h2>Réservez votre atelier</h2>
+    <div id="daisy-widget"></div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <p>&copy; 2025 Daisy Workshops – Tous droits réservés.</p>
+</footer>
+
+<!-- JS du widget -->
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
-    DaisyWidget.init();
+    DaisyWidget.init("#daisy-widget");
 </script>
 </body>
 </html>

@@ -1,0 +1,62 @@
+/* Style global */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: #fdfdfd;
+    color: #333;
+}
+
+/* Header */
+.site-header {
+    background: #4c5fd7;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+.site-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+.site-header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Section intro */
+.intro {
+    padding: 2rem;
+    text-align: center;
+}
+.hero-image {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+/* Section réservation */
+.reservation {
+    background: #f4f6ff;
+    padding: 2rem;
+    text-align: center;
+}
+.reservation h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #4c5fd7;
+}
+#daisy-widget {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Footer */
+.site-footer {
+    background: #222;
+    color: #ddd;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
