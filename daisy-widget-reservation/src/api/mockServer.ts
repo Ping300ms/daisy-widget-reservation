@@ -11,26 +11,6 @@ export const workshops: Workshop[] = [
             { id: "s2", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 }, // complet
         ],
     },
-    {
-        id: "w2",
-        title: "Cours de Sculpture en argile",
-        description: "Apprenez à modeler l’argile et repartez avec votre création.",
-        price: 60,
-        slots: [
-            { id: "s3", date: "2025-10-15T18:30:00", capacity: 12, booked: 5 },
-            { id: "s4", date: "2025-10-18T09:30:00", capacity: 12, booked: 2 },
-        ],
-    },
-    {
-        id: "w3",
-        title: "Stage Photo Portrait",
-        description: "Techniques de lumière et pose pour capturer des portraits uniques.",
-        price: 80,
-        slots: [
-            { id: "s5", date: "2025-10-20T14:00:00", capacity: 6, booked: 1 },
-            { id: "s6", date: "2025-10-22T14:00:00", capacity: 6, booked: 0 },
-        ],
-    },
 ];
 let bookings: Booking[] = [];
 

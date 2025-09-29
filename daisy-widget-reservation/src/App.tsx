@@ -1,11 +1,11 @@
 import './App.css'
-import Title from "./components/Title.tsx";
+import BookingWidget from "./components/BookingWidget.tsx";
 
 function App() {
 
   return (
     <>
-      <Title/>
+      <BookingWidget/>
     </>
   )
 }
