@@ -1,9 +1,7 @@
 export type Booking = {
     id: string;
     slotId: string;
-    name: string;
-    email: string;
-    phone: string;
+    user: BookingUser
     status: "pending" | "confirmed" | "failed";
 };
 
@@ -21,3 +19,11 @@ export type Workshop = {
     price: number;
     slots: Slot[];
 };
+
+export type BookingUser = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+};
+

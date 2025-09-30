@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
-import { fetchWorkshop } from "../api/mockServer";
+import {bookSlot, fetchWorkshop} from "../api/mockServer";
 import WorkshopCard from "./WorkshopCard";
 import BookingForm from "./BookingForm";
 import PaymentForm from "./PaymentForm";
 import StatusMessage from "./StatusMessage";
-import type { Workshop } from "../api/types";
+import type {BookingUser, Workshop} from "../api/types";
 
 function BookingWidget() {
     const [workshop, setWorkshop] = useState<Workshop | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
-    const [userData, setUserData] = useState<any>(null);
+    const [userData, setUserData] = useState<BookingUser | null>(null);
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "full">("idle");
+    const [key, setKey] = useState<string>("");
 
     useEffect(() => {
         setStatus("loading");
@@ -23,6 +24,8 @@ function BookingWidget() {
             setStatus("error");
             return;
         }
+
+        setKey(apiKey);
 
         fetchWorkshop(apiKey)
             .then((data) => {
@@ -40,7 +43,7 @@ function BookingWidget() {
         setStatus("idle");
     };
 
-    const handleFormSubmit = (data: any) => {
+    const handleFormSubmit = (data: BookingUser) => {
         setUserData(data);
         setStatus("idle");
     };
@@ -49,9 +52,15 @@ function BookingWidget() {
         setUserData(null);
     };
 
-    const handlePaymentResult = (success: boolean) => {
-        if (success) {
-            setStatus("success");
+    const handlePaymentResult = async (success: boolean) => {
+        if (success && key && selectedSlot && userData) {
+            try {
+                await bookSlot(key, selectedSlot, userData);
+                setStatus("success");
+            } catch (err) {
+                console.error("Erreur réservation:", err);
+                setStatus("full");
+            }
         } else {
             setStatus("error");
         }

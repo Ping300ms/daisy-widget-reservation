@@ -1,7 +1,8 @@
 import { useState } from "react";
+import type {BookingUser} from "../api/types.ts";
 
 type BookingFormProps = {
-    onSubmit: (data: { firstName: string; lastName: string; email: string; phone: string }) => void;
+    onSubmit: (data: BookingUser) => void;
 };
 
 function BookingForm({ onSubmit }: BookingFormProps) {

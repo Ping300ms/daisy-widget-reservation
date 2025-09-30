@@ -1,6 +1,5 @@
-import type { Booking, Slot, Workshop } from "./types.ts";
+import type {Booking, BookingUser, Slot, Workshop} from "./types.ts";
 
-// Dictionnaire d'ateliers indexés par une clé (par ex. API key)
 export const workshops: Record<string, Workshop> = {
     "demo-123": {
         id: "w1",
@@ -9,7 +8,7 @@ export const workshops: Record<string, Workshop> = {
         price: 45,
         slots: [
             { id: "s1", date: "2025-10-10T14:00:00", capacity: 10, booked: 3 },
-            { id: "s2", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 }, // complet
+            { id: "s2", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 },
         ],
     },
     "demo-456": {
@@ -26,7 +25,6 @@ export const workshops: Record<string, Workshop> = {
 
 const bookings: Booking[] = [];
 
-// ⬇️ Nouveau fetch basé sur la clé
 export async function fetchWorkshop(apiKey: string): Promise<Workshop> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -40,17 +38,15 @@ export async function fetchWorkshop(apiKey: string): Promise<Workshop> {
     });
 }
 
-// Paiement simulé
 export async function makePayment(): Promise<boolean> {
-    const success = Math.random() > 0.3; // 70% de succès
+    const success = Math.random() > 0;
     return new Promise(resolve => setTimeout(() => resolve(success), 1500));
 }
 
-// Réservation d’un créneau
 export async function bookSlot(
     apiKey: string,
     slotId: string,
-    user: { name: string; email: string; phone: string }
+    user: BookingUser
 ): Promise<Booking> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -67,11 +63,12 @@ export async function bookSlot(
             const booking: Booking = {
                 id: Math.random().toString(36).substring(2),
                 slotId,
-                ...user,
+                user,
                 status: Math.random() > 0.2 ? "confirmed" : "failed",
             };
 
             bookings.push(booking);
+            console.log(booking);
             resolve(booking);
         }, 500);
     });

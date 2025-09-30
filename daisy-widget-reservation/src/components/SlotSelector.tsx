@@ -1,4 +1,4 @@
-import type {Slot} from "../api/types.ts";
+import type { Slot } from "../api/types.ts";
 
 type SlotSelectorProps = {
     slots: Slot[];
@@ -6,27 +6,34 @@ type SlotSelectorProps = {
 };
 
 function SlotSelector({ slots, onSelect }: SlotSelectorProps) {
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        onSelect(e.target.value);
+    };
+
     return (
-        <div>
-            <h4 className="font-medium mb-2">Choisissez un créneau :</h4>
-            <ul className="space-y-2">
+        <div className="mb-4">
+            <select
+                id="slot-select"
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2"
+                defaultValue=""
+            >
+                <option value="" disabled>
+                    Sélectionnez un créneau
+                </option>
                 {slots.map((slot) => {
                     const isFull = slot.booked >= slot.capacity;
                     return (
-                        <li key={slot.id}>
-                            <button
-                                className={`w-full px-3 py-2 rounded border 
-                  ${isFull ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-indigo-500 text-white hover:bg-indigo-600"}`}
-                                disabled={isFull}
-                                onClick={() => onSelect(slot.id)}
-                            >
-                                {new Date(slot.date).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })}
-                                — {slot.capacity - slot.booked} places restantes
-                            </button>
-                        </li>
+                        <option key={slot.id} value={slot.id} disabled={isFull}>
+                            {new Date(slot.date).toLocaleString("fr-FR", {
+                                dateStyle: "long",
+                                timeStyle: "short",
+                            })}
+                            {isFull ? " — Complet" : ` — ${slot.capacity - slot.booked} places restantes`}
+                        </option>
                     );
                 })}
-            </ul>
+            </select>
         </div>
     );
 }
