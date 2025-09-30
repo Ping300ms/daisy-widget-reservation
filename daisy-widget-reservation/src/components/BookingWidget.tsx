@@ -1,23 +1,38 @@
 import { useState, useEffect } from "react";
-import { fetchWorkshops } from "../api/mockServer";
+import { fetchWorkshop } from "../api/mockServer";
 import WorkshopCard from "./WorkshopCard";
 import BookingForm from "./BookingForm";
-import PaymentSimulator from "./PaymentSimulator";
+import PaymentForm from "./PaymentForm";
 import StatusMessage from "./StatusMessage";
-import type {Workshop} from "../api/types.ts";
+import type { Workshop } from "../api/types";
 
 function BookingWidget() {
-    const [workshops, setWorkshops] = useState<Workshop[]>([]);
+    const [workshop, setWorkshop] = useState<Workshop | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
     const [userData, setUserData] = useState<any>(null);
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "full">("idle");
 
     useEffect(() => {
         setStatus("loading");
-        fetchWorkshops().then((data) => {
-            setWorkshops(data);
-            setStatus("idle");
-        });
+
+        const container = document.querySelector("#daisy-widget") as HTMLElement | null;
+        const apiKey = container?.dataset.apiKey;
+
+        if (!apiKey) {
+            console.error("⚠️ Aucune clé API trouvée dans #daisy-widget");
+            setStatus("error");
+            return;
+        }
+
+        fetchWorkshop(apiKey)
+            .then((data) => {
+                setWorkshop(data);
+                setStatus("idle");
+            })
+            .catch((err) => {
+                console.error("Erreur fetchWorkshop:", err);
+                setStatus("error");
+            });
     }, []);
 
     const handleSlotSelect = (slotId: string) => {
@@ -30,6 +45,10 @@ function BookingWidget() {
         setStatus("idle");
     };
 
+    const handleCancel = () => {
+        setUserData(null);
+    };
+
     const handlePaymentResult = (success: boolean) => {
         if (success) {
             setStatus("success");
@@ -40,21 +59,21 @@ function BookingWidget() {
 
     return (
         <div className="max-w-xl mx-auto border rounded-xl p-4 shadow-md bg-white mb-4">
-            {workshops.map((ws) => (
+            {workshop && (
                 <WorkshopCard
-                    key={ws.id}
-                    title={ws.title}
-                    description={ws.description}
-                    price={ws.price}
-                    slots={ws.slots}
+                    key={workshop.id}
+                    title={workshop.title}
+                    description={workshop.description}
+                    price={workshop.price}
+                    slots={workshop.slots}
                     onSelectSlot={handleSlotSelect}
                 />
-            ))}
+            )}
 
             {selectedSlot && !userData && <BookingForm onSubmit={handleFormSubmit} />}
 
             {selectedSlot && userData && status !== "success" && (
-                <PaymentSimulator onResult={handlePaymentResult} />
+                <PaymentForm onResult={handlePaymentResult} onCancel={handleCancel} />
             )}
 
             <StatusMessage status={status} />
