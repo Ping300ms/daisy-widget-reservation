@@ -5,8 +5,12 @@ import BookingForm from "./BookingForm";
 import PaymentForm from "./PaymentForm";
 import StatusMessage from "./StatusMessage";
 import type {BookingUser, Workshop} from "../api/types";
+import useApplyTheme from "../hooks/UseApplyTheme.tsx";
 
 function BookingWidget() {
+
+    useApplyTheme("daisy-widget");
+
     const [workshop, setWorkshop] = useState<Workshop | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
     const [userData, setUserData] = useState<BookingUser | null>(null);
@@ -67,7 +71,7 @@ function BookingWidget() {
     };
 
     return (
-        <div className="max-w-xl mx-auto border rounded-xl p-4 shadow-md bg-white mb-4">
+        <div className="max-w-xl mx-auto rounded-xl p-4 shadow-md bg-daisy-bg mb-4">
             {workshop && (
                 <WorkshopCard
                     key={workshop.id}

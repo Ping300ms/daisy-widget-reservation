@@ -12,9 +12,9 @@ type WorkshopCardProps = {
 function WorkshopCard({ title, description, price, slots, onSelectSlot }: WorkshopCardProps) {
     return (
         <div className="">
-            <h3 className="text-xl font-bold mb-2">{title}</h3>
-            <p className="text-gray-700 mb-2">{description}</p>
-            <p className="font-semibold text-indigo-600 mb-3">{price} €</p>
+            <h3 className="text-xl text-daisy-text font-bold mb-2">{title}</h3>
+            <p className="text-daisy-text mb-2">{description}</p>
+            <p className="font-semibold text-daisy-accent mb-3">{price} €</p>
             <SlotSelector slots={slots} onSelect={onSelectSlot} />
         </div>
     );

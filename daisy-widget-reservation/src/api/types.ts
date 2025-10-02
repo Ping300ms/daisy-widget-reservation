@@ -7,7 +7,7 @@ export type Booking = {
 
 export type Slot = {
     id: string;
-    date: string;   // ISO format
+    date: string;
     capacity: number;
     booked: number;
 };

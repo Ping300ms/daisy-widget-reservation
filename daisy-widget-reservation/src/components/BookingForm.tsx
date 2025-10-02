@@ -23,7 +23,7 @@ function BookingForm({ onSubmit }: BookingFormProps) {
                 placeholder="Prénom"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
             <input
@@ -31,7 +31,7 @@ function BookingForm({ onSubmit }: BookingFormProps) {
                 placeholder="Nom"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
             <input
@@ -39,7 +39,7 @@ function BookingForm({ onSubmit }: BookingFormProps) {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
             <input
@@ -47,10 +47,10 @@ function BookingForm({ onSubmit }: BookingFormProps) {
                 placeholder="Téléphone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
-            <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">
+            <button type="submit" className="bg-daisy-accent text-white px-4 py-2 rounded ">
                 Réserver
             </button>
         </form>

@@ -11,11 +11,11 @@ function SlotSelector({ slots, onSelect }: SlotSelectorProps) {
     };
 
     return (
-        <div className="mb-4">
+        <div className="mb-4 text-daisy-text">
             <select
                 id="slot-select"
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 defaultValue=""
             >
                 <option value="" disabled>

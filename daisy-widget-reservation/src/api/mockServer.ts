@@ -1,6 +1,6 @@
 import type {Booking, BookingUser, Slot, Workshop} from "./types.ts";
 
-export const workshops: Record<string, Workshop> = {
+const workshops: Record<string, Workshop> = {
     "demo-123": {
         id: "w1",
         title: "Atelier Peinture intuitive",
@@ -8,7 +8,8 @@ export const workshops: Record<string, Workshop> = {
         price: 45,
         slots: [
             { id: "s1", date: "2025-10-10T14:00:00", capacity: 10, booked: 3 },
-            { id: "s2", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 },
+            { id: "s2", date: "2025-10-10T14:00:00", capacity: 1, booked: 0 },
+            { id: "s3", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 },
         ],
     },
     "demo-456": {

@@ -29,7 +29,7 @@ function PaymentForm({ onResult, onCancel }: PaymentSimulatorProps) {
     return (
         <form
             onSubmit={handlePayment}
-            className="bg-white shadow-md rounded-xl p-4 space-y-3 mt-4 relative"
+            className="p-4 space-y-3 mt-4 relative text-daisy-text"
         >
             <button
                 type="button"
@@ -50,7 +50,7 @@ function PaymentForm({ onResult, onCancel }: PaymentSimulatorProps) {
                 value={cardNumber}
                 onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, ""))}
                 maxLength={16}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
 
@@ -61,7 +61,7 @@ function PaymentForm({ onResult, onCancel }: PaymentSimulatorProps) {
                     value={expiry}
                     onChange={(e) => setExpiry(e.target.value)}
                     maxLength={5}
-                    className="w-1/2 border rounded px-3 py-2"
+                    className="w-1/2 border rounded px-3 py-2 bg-daisy-input"
                     required
                 />
                 <input
@@ -70,7 +70,7 @@ function PaymentForm({ onResult, onCancel }: PaymentSimulatorProps) {
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value.replace(/\D/g, ""))}
                     maxLength={3}
-                    className="w-1/2 border rounded px-3 py-2"
+                    className="w-1/2 border rounded px-3 py-2 bg-daisy-input"
                     required
                 />
             </div>
@@ -80,14 +80,14 @@ function PaymentForm({ onResult, onCancel }: PaymentSimulatorProps) {
                 placeholder="Nom du titulaire"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 required
             />
 
             <button
                 type="submit"
                 disabled={loading}
-                className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 w-full"
+                className="bg-daisy-accent text-white px-4 py-2 rounded  w-full"
             >
                 {loading ? "Traitement..." : "Payer"}
             </button>

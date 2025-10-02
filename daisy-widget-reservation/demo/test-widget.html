@@ -5,17 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateliers Créatifs – Daisy</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fichier CSS généré par ton widget -->
     <link rel="stylesheet" href="../public/daisy-widget-reservation.css">
+    <style>
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .theme-toggle:hover {
+            opacity: 0.9;
+        }
+
+        body.dark {
+            background: #1f2937;
+            color: #f9fafb;
+        }
+        body.dark header,
+        body.dark footer {
+            background: #111827;
+            color: #f9fafb;
+        }
+    </style>
 </head>
 <body>
-<!-- Header -->
 <header class="site-header">
     <h1>Les Ateliers Créatifs de Daisy</h1>
     <p>Explorez la peinture, la sculpture et la photo avec nos artistes passionnés.</p>
 </header>
 
-<!-- Section de présentation -->
 <section class="intro">
     <img src="atelier.jpg" alt="Atelier artistique" class="hero-image">
     <p>
@@ -24,21 +47,30 @@
     </p>
 </section>
 
-<!-- Widget Daisy -->
 <section class="reservation">
     <h2>Réservez votre atelier</h2>
-    <div id="daisy-widget" data-api-key="demo-123"/>
+    <div id="daisy-widget" data-api-key="demo-123" data-theme="light"></div>
 </section>
 
-<!-- Footer -->
 <footer class="site-footer">
     <p>&copy; 2025 Daisy Workshops – Tous droits réservés.</p>
 </footer>
 
-<!-- JS du widget -->
+<button id="theme-toggle" class="theme-toggle">🌙</button>
+
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
     DaisyWidget.init("#daisy-widget");
+
+    const toggleBtn = document.getElementById("theme-toggle");
+    const widget = document.getElementById("daisy-widget");
+
+    toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        widget.dataset.theme = isDark ? "dark" : "light";
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        DaisyWidget.init("#daisy-widget");
+    });
 </script>
 </body>
 </html>
