@@ -72,5 +72,11 @@
         DaisyWidget.init("#daisy-widget");
     });
 </script>
+<script>
+    window.addEventListener("daisyBookingSuccess", (e) => {
+        console.log("Paiement réussi :", e.detail);
+        alert(`Merci ${e.detail.user.firstName}, votre réservation est confirmée !`);
+    });
+</script>
 </body>
 </html>

@@ -40,7 +40,7 @@ function BookingWidget() {
                 console.error("Erreur fetchWorkshop:", err);
                 setStatus("error");
             });
-    }, []);
+    }, [key]);
 
     const handleSlotSelect = (slotId: string) => {
         setSelectedSlot(slotId);
@@ -61,6 +61,14 @@ function BookingWidget() {
             try {
                 await bookSlot(key, selectedSlot, userData);
                 setStatus("success");
+                const event = new CustomEvent("daisyBookingSuccess", {
+                    detail: {
+                        slotId: selectedSlot,
+                        user: userData,
+                        workshop: workshop,
+                    },
+                });
+                window.dispatchEvent(event);
             } catch (err) {
                 console.error("Erreur réservation:", err);
                 setStatus("full");
