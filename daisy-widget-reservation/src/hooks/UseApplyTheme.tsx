@@ -9,9 +9,9 @@ function useApplyTheme(containerId: string) {
         const accent = container.dataset.accentColor ?? "#4f46e5";
         const bg = container.dataset.bg ?? (theme === "dark" ? "#1f2937" : "#ffffff");
         const text = container.dataset.text ?? (theme === "dark" ? "#f9fafb" : "#111827");
-        const radius = container.dataset.text ?? (theme === "dark" ? "#f9fafb" : "#111827");
-        const font = container.dataset.text ?? (theme === "dark" ? "#f9fafb" : "#111827");
-        const input = container.dataset.input ?? (theme === "dark" ? "#111827" : "#f9fafb");
+        const radius = container.dataset.radius ?? "8px";
+        const font = container.dataset.font ?? (theme === "dark" ? "#f9fafb" : "#111827");
+        const input = container.dataset.input ?? "Inter, sans-serif";
 
         container.style.setProperty("--daisy-primary", accent);
         container.style.setProperty("--daisy-bg", bg);

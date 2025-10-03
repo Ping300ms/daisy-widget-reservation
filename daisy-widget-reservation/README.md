@@ -1,21 +1,101 @@
-Utilisation de rollup pour le package final -> justif ?
-Utilisation de embed plutot qu'un iframe -> justif ?
-Je genere un js ET un css parce aue si j'integre le css dans le js il ne s'appliquera qu'au moment de l'exec du js donc on aura un widget moche pendant une fraction de seconde
+# Daisy – Widget de réservation
+### Choix
 
-Un envoi d'event en cas de reussite de paiement est interessant pour le site hote.
-La communication avec le site hote se fait via un dispatch d'event.
+Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. Le CSS est externalisé pour éviter un “flash” de widget non stylé à l’exécution du JavaScript.
 
-Simulation du backend Daisy dans le fichier mockServer.ts
+### Gestion de la personnalisation
 
+Les attributs data-* appliqués au conteneur du widget permettent de configurer rapidement un thème ou un style global.
+Ces attributs vont pouvoir gérer:
 
-Les differents etats visuels sont geres par un seul composant (statusMessage) pour plus de coherence
-Si un creneau est plein l'utilisateur ne peut plus le selectionner dans le menu deroulant
+| Syntax      | Description                |
+|-------------|----------------------------|
+| data-theme  | Thème  global, peut etre "light" ou "dark" |
+| data-bg     | Couleur de fond      | 
+| data-text   | Couleur du texte     | 
+| data-accent | Couleur d'accent (boutons et prix) | 
+| data-radius | Border-radius              | 
+| data-font   | Police du texte            | 
+| data-input  | Couleur de fond des inputs | 
 
+### Communication avec le site hôte
 
-LANCEMENT DU PROJET
-pour lancer le projet en environnement dev:
-    npm run dev
+Le widget envoie des retours vers le site hôte grâce à des callbacks fournis lors de l’initialisation:
+```js
+(DaisyWidget.init(selector, onSuccess, onError))
+```
+Par exemple, après un paiement réussi, l’hôte peut afficher une confirmation personnalisée ou encore rediriger vers une autre page. En cas d’échec, l’hôte peut être notifié de la même manière.
 
-pour build le projet:
-    npm run build
-    lancer test-widget.html dans le dossier demo
+### API / Données
+
+L’API est simulée dans mockServer.ts pour représenter le backend Daisy.
+
+Le schéma de données couvre les besoins fonctionnels du parcours de réservation :
+
+Workshop : décrit un atelier
+```js
+type Workshop = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  slots: Slot[];
+};
+```
+Slot : représente un créneau horaire, avec un identifiant, une date, une capacité totale et le nombre déjà réservé. Ce découpage permet de gérer facilement la disponibilité et d’éviter les sur-réservations.
+```js
+type Slot = {
+    id: string;
+    date: string;
+    capacity: number;
+    booked: number;
+};
+```
+BookingUser : regroupe les informations personnelles nécessaires à une réservation (nom, prénom, email, téléphone). Le fait de l’isoler dans un type dédié permet de le réutiliser dans d’autres contextes (profil utilisateur, gestion CRM, etc.).
+```js
+type BookingUser = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+};
+```
+Booking : enregistrement effectif d’une réservation. Il associe un slot, un utilisateur et un statut. Le statut peut être pending (si on voulait simuler une réservation en cours), confirmed (si le paiement a réussi) ou failed (si le paiement ou la validation échoue).
+```js
+type Booking = {
+  id: string;
+  slotId: string;
+  user: BookingUser;
+  status: "pending" | "confirmed" | "failed";
+};
+```
+Les clés API (par exemple "demo-123") permettent de simuler que chaque site hôte est lié à un atelier particulier. Cela permet à daisy de par exemple savoir à quel atelier enlever des créneaux.
+```html
+ <div id="daisy-widget" data-api-key="demo-123"/>
+```
+### Expérience utilisateur
+
+Le parcours utilisateur est guidé par états successifs :
+
+- Affichage de l’atelier et de ses créneaux disponibles.
+
+- Sélection du créneau via un menu déroulant. Les créneaux complets sont désactivés pour éviter toute erreur.
+
+- Formulaire de réservation (nom, prénom, email, téléphone).
+
+- Simulation du paiement par carte.
+
+- Affichage du résultat via un composant StatusMessage, qui assure une cohérence visuelle et fonctionnelle pour tous les cas (loading, succès, erreur, créneau complet).
+
+### Lancement du projet
+
+En développement :
+```
+npm run dev
+```
+Pour construire le bundle :
+```
+npm run build
+```
+
+Puis ouvrir demo/test-widget.html, qui intègre directement le script et le CSS générés dans /public.

@@ -83,7 +83,7 @@ function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
     };
 
     return (
-        <div className="max-w-xl mx-auto rounded-xl p-4 shadow-md bg-daisy-bg mb-4">
+        <div className="max-w-xl mx-auto rounded-[var(--daisy-radius)] p-4 shadow-md bg-daisy-bg mb-4 " style={{ fontFamily: "var(--daisy-font)" }}>
             {workshop && (
                 <WorkshopCard
                     key={workshop.id}
