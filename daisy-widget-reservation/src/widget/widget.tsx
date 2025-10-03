@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
-import App from "../App";
 import "../index.css";
+import BookingWidget from "../components/BookingWidget.tsx";
 
 
 interface DaisyWidgetAPI {
-    init: (selector?: string) => void;
+    init: (selector?: string, onSuccess?: () => undefined, onError?: () => undefined) => void;
 }
 
 declare global {
@@ -14,11 +14,11 @@ declare global {
 }
 
 window.DaisyWidget = {
-    init: (selector = "#daisy-widget") => {
+    init: (selector = "#daisy-widget", onSuccess = () => {}, onError = () => {}) => {
         const container = document.querySelector<HTMLElement>(selector);
         if (!container) return console.error("Element introuvable");
 
         const root = createRoot(container);
-        root.render(<App />);
+        root.render(<BookingWidget onSuccess={onSuccess} onError={onError} />);
     },
 };

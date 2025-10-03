@@ -7,7 +7,12 @@ import StatusMessage from "./StatusMessage";
 import type {BookingUser, Workshop} from "../api/types";
 import useApplyTheme from "../hooks/UseApplyTheme.tsx";
 
-function BookingWidget() {
+type BookingWidgetProps = {
+    onSuccess? : () => undefined;
+    onError? : () => undefined;
+}
+
+function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
 
     useApplyTheme("daisy-widget");
 
@@ -61,20 +66,19 @@ function BookingWidget() {
             try {
                 await bookSlot(key, selectedSlot, userData);
                 setStatus("success");
-                const event = new CustomEvent("daisyBookingSuccess", {
-                    detail: {
-                        slotId: selectedSlot,
-                        user: userData,
-                        workshop: workshop,
-                    },
-                });
-                window.dispatchEvent(event);
+
+                if (onSuccess) {
+                    onSuccess();
+                }
             } catch (err) {
                 console.error("Erreur réservation:", err);
                 setStatus("full");
             }
         } else {
             setStatus("error");
+            if (onError) {
+                onError();
+            }
         }
     };
 

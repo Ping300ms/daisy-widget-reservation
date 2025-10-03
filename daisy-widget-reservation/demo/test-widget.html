@@ -60,7 +60,7 @@
 
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
-    DaisyWidget.init("#daisy-widget");
+    DaisyWidget.init("#daisy-widget", () => {alert("ok")});
 
     const toggleBtn = document.getElementById("theme-toggle");
     const widget = document.getElementById("daisy-widget");
@@ -70,12 +70,6 @@
         widget.dataset.theme = isDark ? "dark" : "light";
         toggleBtn.textContent = isDark ? "☀️" : "🌙";
         DaisyWidget.init("#daisy-widget");
-    });
-</script>
-<script>
-    window.addEventListener("daisyBookingSuccess", (e) => {
-        console.log("Paiement réussi :", e.detail);
-        alert(`Merci ${e.detail.user.firstName}, votre réservation est confirmée !`);
     });
 </script>
 </body>
