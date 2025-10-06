@@ -19,19 +19,23 @@
     </ul>
 </nav>
 
-<header>
-    <h1>Les Ateliers Créatifs de ABC</h1>
-    <p>Découvrez des expériences artistiques uniques avec nos créateurs partenaires.</p>
+<header class="hero-header">
+    <img src="atelier.jpg" alt="Atelier créatif en action" class="hero-bg" />
+    <div class="hero-content">
+        <h1>Les Ateliers Créatifs de ABC</h1>
+        <p>Découvrez des expériences artistiques uniques avec nos créateurs partenaires.</p>
+        <a href="#reservation" class="btn-primary">Réserver un atelier</a>
+    </div>
 </header>
 
 <section class="intro">
-    <img src="atelier.jpg" alt="Atelier créatif en action" class="hero" />
     <p>
-        Peinture intuitive, sculpture d’argile, photographie d’art… <ABC></ABC> vous connecte à des artistes passionnés pour des moments de création inspirants. Réservez simplement un créneau, venez tel que vous êtes, repartez avec votre œuvre et le sourire.
+        Peinture intuitive, sculpture d’argile, photographie d’art… <strong>ABC Workshops</strong> vous connecte à des artistes passionnés pour des moments de création inspirants.
+        Choisissez votre atelier, sélectionnez un créneau et vivez une expérience inoubliable.
     </p>
 </section>
 
-<section class="reservation">
+<section id="reservation" class="reservation">
     <h2>Réservez votre atelier</h2>
     <div
             id="daisy-widget"
@@ -51,7 +55,7 @@
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
     DaisyWidget.init("#daisy-widget", () => {
-        alert("✅ Paiement réussi !");
+        alert("✅ Réservation confirmée ! Vous recevrez un email de confirmation sous peu.");
     });
 
     const toggleBtn = document.getElementById("theme-toggle");
