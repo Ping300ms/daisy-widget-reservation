@@ -12,7 +12,7 @@ function StatusMessage({ status, message }: StatusMessageProps) {
         case "loading":
             return <div className={`${base} bg-yellow-100 text-yellow-800`}>Chargement...</div>;
         case "success":
-            return <div className={`${base} bg-green-100 text-green-800`}>{message || "Réservation confirmée 🎉"}</div>;
+            return <div className={`${base} bg-green-100 text-green-800`}>{message || "Votre réservation a bien été confirmée. Un e-mail de confirmation vous a été envoyé."}</div>;
         case "error":
             return <div className={`${base} bg-red-100 text-red-800`}>{message || "Erreur lors du paiement ❌"}</div>;
         case "full":

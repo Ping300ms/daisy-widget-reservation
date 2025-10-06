@@ -18,6 +18,8 @@ Ces attributs vont pouvoir gérer:
 | data-font   | Police du texte            | 
 | data-input  | Couleur de fond des inputs | 
 
+Un Observer est mis en place pour changer a la volée le style du widget a chaque changement de data-*.
+
 ### Communication avec le site hôte
 
 Le widget envoie des retours vers le site hôte grâce à des callbacks fournis lors de l’initialisation:

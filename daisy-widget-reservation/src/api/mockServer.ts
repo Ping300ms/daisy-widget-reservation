@@ -8,7 +8,7 @@ const workshops: Record<string, Workshop> = {
         price: 45,
         slots: [
             { id: "s1", date: "2025-10-10T14:00:00", capacity: 10, booked: 3 },
-            { id: "s2", date: "2025-10-10T14:00:00", capacity: 1, booked: 0 },
+            { id: "s2", date: "2025-10-10T15:00:00", capacity: 1, booked: 0 },
             { id: "s3", date: "2025-10-12T10:00:00", capacity: 8, booked: 8 },
         ],
     },
@@ -65,7 +65,6 @@ export async function bookSlot(
                 id: Math.random().toString(36).substring(2),
                 slotId,
                 user,
-                status: Math.random() > 0.2 ? "confirmed" : "failed",
             };
 
             bookings.push(booking);

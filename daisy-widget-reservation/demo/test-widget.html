@@ -1,58 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ateliers Créatifs – Daisy</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../public/daisy-widget-reservation.css">
-    <style>
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        .theme-toggle:hover {
-            opacity: 0.9;
-        }
-
-        body.dark {
-            background: #1f2937;
-            color: #f9fafb;
-        }
-        body.dark header,
-        body.dark footer {
-            background: #111827;
-            color: #f9fafb;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daisy Workshops – Réservez votre atelier créatif</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../public/daisy-widget-reservation.css" />
 </head>
+
 <body>
-<header class="site-header">
+<nav class="navbar">
+    <div class="nav-brand">🌸 Daisy</div>
+    <ul class="nav-links">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Ateliers</a></li>
+        <li><a href="#">Artistes</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<header>
     <h1>Les Ateliers Créatifs de Daisy</h1>
-    <p>Explorez la peinture, la sculpture et la photo avec nos artistes passionnés.</p>
+    <p>Découvrez des expériences artistiques uniques avec nos créateurs partenaires.</p>
 </header>
 
 <section class="intro">
-    <img src="atelier.jpg" alt="Atelier artistique" class="hero-image">
+    <img src="atelier.jpg" alt="Atelier créatif en action" class="hero" />
     <p>
-        Participez à nos ateliers artistiques uniques à Paris.
-        Choisissez un créneau, réservez votre place et laissez libre cours à votre créativité !
+        Peinture intuitive, sculpture d’argile, photographie d’art… Daisy vous connecte à des artistes passionnés pour des moments de création inspirants. Réservez simplement un créneau, venez tel que vous êtes, repartez avec votre œuvre et le sourire.
     </p>
 </section>
 
 <section class="reservation">
     <h2>Réservez votre atelier</h2>
-    <div id="daisy-widget" data-api-key="demo-123" data-theme="light"></div>
+    <div
+            id="daisy-widget"
+            data-api-key="demo-123"
+            data-theme="light"
+            data-accent-color="#4f46e5"
+            data-radius="12px"
+    ></div>
 </section>
 
-<footer class="site-footer">
+<footer>
     <p>&copy; 2025 Daisy Workshops – Tous droits réservés.</p>
 </footer>
 
@@ -60,16 +50,17 @@
 
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
-    DaisyWidget.init("#daisy-widget", () => {alert("ok")});
+    DaisyWidget.init("#daisy-widget", () => {
+        alert("✅ Paiement réussi !");
+    });
 
     const toggleBtn = document.getElementById("theme-toggle");
     const widget = document.getElementById("daisy-widget");
 
     toggleBtn.addEventListener("click", () => {
         const isDark = document.body.classList.toggle("dark");
-        widget.dataset.theme = isDark ? "dark" : "light";
         toggleBtn.textContent = isDark ? "☀️" : "🌙";
-        DaisyWidget.init("#daisy-widget");
+        widget.dataset.theme = isDark ? "dark" : "light";
     });
 </script>
 </body>

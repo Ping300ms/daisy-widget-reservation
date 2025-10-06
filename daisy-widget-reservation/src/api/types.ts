@@ -2,7 +2,6 @@ export type Booking = {
     id: string;
     slotId: string;
     user: BookingUser
-    status: "pending" | "confirmed" | "failed";
 };
 
 export type Slot = {
