@@ -1,26 +1,21 @@
-import type { Slot } from "../api/types.ts";
+import type {Slot} from "../api/types.ts";
 
 type SlotSelectorProps = {
     slots: Slot[];
+    selectedSlot: string | null;
     onSelect: (slotId: string) => void;
 };
 
-function SlotSelector({ slots, onSelect }: SlotSelectorProps) {
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        onSelect(e.target.value);
-    };
-
+function SlotSelector({ slots, selectedSlot, onSelect }: SlotSelectorProps) {
     return (
-        <div className="mb-4 text-daisy-text">
+        <div>
+            <h4 className="font-medium mb-2">Choisissez un créneau :</h4>
             <select
-                id="slot-select"
-                onChange={handleChange}
-                className="w-full border rounded px-3 py-2 bg-daisy-input"
-                defaultValue=""
+                className="w-full border rounded px-3 py-2"
+                value={selectedSlot ?? ""}
+                onChange={(e) => onSelect(e.target.value)}
             >
-                <option value="" disabled>
-                    Sélectionnez un créneau
-                </option>
+                <option value="">Sélectionnez un créneau</option>
                 {slots.map((slot) => {
                     const isFull = slot.booked >= slot.capacity;
                     return (
@@ -28,8 +23,8 @@ function SlotSelector({ slots, onSelect }: SlotSelectorProps) {
                             {new Date(slot.date).toLocaleString("fr-FR", {
                                 dateStyle: "long",
                                 timeStyle: "short",
-                            })}
-                            {isFull ? " — Complet" : ` — ${slot.capacity - slot.booked} places restantes`}
+                            })}{" "}
+                            — {slot.capacity - slot.booked} places restantes
                         </option>
                     );
                 })}

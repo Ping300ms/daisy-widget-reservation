@@ -66,7 +66,7 @@ function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
             try {
                 await bookSlot(key, selectedSlot, userData);
                 setStatus("success");
-
+                setSelectedSlot("0");
                 if (onSuccess) {
                     onSuccess();
                 }
@@ -92,6 +92,7 @@ function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
                     price={workshop.price}
                     slots={workshop.slots}
                     onSelectSlot={handleSlotSelect}
+                    selectedSlot={selectedSlot}
                 />
             )}
 

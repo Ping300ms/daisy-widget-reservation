@@ -7,15 +7,16 @@ type WorkshopCardProps = {
     price: number;
     slots: Slot[];
     onSelectSlot: (slotId: string) => void;
+    selectedSlot: string | null;
 };
 
-function WorkshopCard({ title, description, price, slots, onSelectSlot }: WorkshopCardProps) {
+function WorkshopCard({ title, description, price, slots, onSelectSlot, selectedSlot }: WorkshopCardProps) {
     return (
         <div className="">
             <h3 className="text-xl text-daisy-text font-bold mb-2">{title}</h3>
             <p className="text-daisy-text mb-2">{description}</p>
             <p className="font-semibold text-daisy-accent mb-3">{price} €</p>
-            <SlotSelector slots={slots} onSelect={onSelectSlot} />
+            <SlotSelector slots={slots} onSelect={onSelectSlot} selectedSlot={selectedSlot} />
         </div>
     );
 }
