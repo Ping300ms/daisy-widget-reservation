@@ -11,7 +11,7 @@ function SlotSelector({ slots, selectedSlot, onSelect }: SlotSelectorProps) {
         <div>
             <h4 className="font-medium mb-2">Choisissez un créneau :</h4>
             <select
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 bg-daisy-input"
                 value={selectedSlot ?? ""}
                 onChange={(e) => onSelect(e.target.value)}
             >
