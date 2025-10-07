@@ -1,7 +1,7 @@
 # Daisy – Widget de réservation
 ### Choix
 
-Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. L'intégration direct en JS permet également l'utilsiation de callbacks.
+Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. L'intégration direct en JS permet également l'utilisation de callbacks.
 Cependant on perd les avantages de l'isolation complète des iframes, notamment la simplicité de mise à jour ou l'indépendance du style.
 Le CSS est externalisé par logique de séparation (le balisage doit être séparé du style qui doit etre séparé du code).
 
@@ -37,7 +37,7 @@ L’API est simulée dans mockServer.ts pour représenter le backend Daisy.
 Le schéma de données couvre les besoins fonctionnels du parcours de réservation :
 
 Workshop : décrit un atelier
-```js
+```ts
 type Workshop = {
   id: string;
   title: string;
@@ -47,7 +47,7 @@ type Workshop = {
 };
 ```
 Slot : représente un créneau horaire, avec un identifiant, une date, une capacité totale et le nombre déjà réservé. Ce découpage permet de gérer facilement la disponibilité et d’éviter les sur-réservations.
-```js
+```ts
 type Slot = {
     id: string;
     date: string;
@@ -56,7 +56,7 @@ type Slot = {
 };
 ```
 BookingUser : regroupe les informations personnelles nécessaires à une réservation (nom, prénom, email, téléphone). Le fait de l’isoler dans un type dédié permet de le réutiliser dans d’autres contextes (profil utilisateur, gestion CRM, etc.).
-```js
+```ts
 type BookingUser = {
   firstName: string;
   lastName: string;
@@ -65,7 +65,7 @@ type BookingUser = {
 };
 ```
 Booking : enregistrement effectif d’une réservation. Il associe un slot et un utilisateur.
-```js
+```ts
 type Booking = {
   id: string;
   slotId: string;
