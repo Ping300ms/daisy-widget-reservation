@@ -1,7 +1,7 @@
 # Daisy – Widget de réservation
 ### Choix
 
-Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. Le CSS est externalisé pour éviter un “flash” de widget non stylé à l’exécution du JavaScript.
+Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. Le CSS est externalisé par logique de séparation (le balisage doit être séparé du style qui doit etre séparé du code).
 
 ### Gestion de la personnalisation
 
@@ -16,6 +16,8 @@ Ces variables vont pouvoir gérer:
 | --daisy-radius | Border-radius              | 
 | --daiys-font   | Police du texte            | 
 | --daisy-input  | Couleur de fond des inputs | 
+
+La gestion du style se fait via des variables CSS pour permettre à l'utilisateur de gérer le style depuis le CSS et donc de rester dans une logique de séparation.
 
 ### Communication avec le site hôte
 
@@ -101,3 +103,37 @@ npm run build
 ```
 
 Puis ouvrir demo/test-widget.html, qui intègre directement le script et le CSS générés dans /public.
+
+### Intégration à une page
+Une fois le widget build on peut l'intégrer à une page de la manière suivante:
+
+
+Import du script du widget:
+```html
+<script src="../public/daisy-widget-reservation.js"></script>
+```
+Import du style du widget:
+```html
+<link rel="stylesheet" href="../public/daisy-widget-reservation.css" />
+```
+Déclaration du widget:
+```html
+<div id="daisy-widget"></div>
+```
+Initialisation du widget:
+```html
+<script>
+    DaisyWidget.init({apiKey: "demo-123",
+                      onSuccess: () => {alert("✅ Réservation confirmée ! Vous recevrez un email de confirmation sous peu.")}}
+    );
+</script>
+```
+
+Le widget peut être initalisé avec plusieurs paramètres:
+
+| Paramètre | Description                                                                       |
+|-----------|-----------------------------------------------------------------------------------|
+| apiKey    | Clé d'API de workshop                                                             | 
+| selector  | Sélecteur de la balise sue laquel le widget sera monté (par défaut #daisy-widget) | 
+| onSucces  | Callback appelé si la réservation réussie                                         | 
+| onError   | Callback appelé si la réservation échoue                                          |
