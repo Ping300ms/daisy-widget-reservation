@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="daisy-widget" data-api-key="demo-123" data-theme="light"></div>
-    <button id="dev-theme-toggle" class="theme-toggle-dev">Toggle Dark Mode (Dev)</button>
+    <button id="dev-theme-toggle" class="theme-toggle-dev">Toggle Dark Mode</button>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       const devToggle = document.getElementById("dev-theme-toggle");
@@ -18,7 +18,7 @@
       devToggle.addEventListener("click", () => {
         const isDark = body.classList.toggle("dark");
         widget.dataset.theme = isDark ? "dark" : "light";
-        devToggle.textContent = isDark ? "Toggle Light Mode" : "Toggle Dark Mode (Dev)";
+        devToggle.textContent = isDark ? "Toggle Light Mode" : "Toggle Dark Mode";
       });
     </script>
   </body>

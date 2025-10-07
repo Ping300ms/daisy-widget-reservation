@@ -30,7 +30,7 @@ body {
 
 .theme-toggle-dev {
     position: fixed;
-    top: 4rem; /* en dessous du bouton principal */
+    top: 4rem;
     right: 1rem;
     background: #4f46e5;
     color: white;
