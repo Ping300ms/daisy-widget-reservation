@@ -18,8 +18,8 @@ const workshops: Record<string, Workshop> = {
         description: "Exprimez vos émotions avec vos mains et la terre.",
         price: 60,
         slots: [
-            { id: "s3", date: "2025-11-02T14:00:00", capacity: 12, booked: 5 },
-            { id: "s4", date: "2025-11-05T18:00:00", capacity: 6, booked: 6 },
+            { id: "s4", date: "2025-11-02T14:00:00", capacity: 12, booked: 5 },
+            { id: "s5", date: "2025-11-05T18:00:00", capacity: 6, booked: 6 },
         ],
     },
 };
@@ -40,8 +40,7 @@ export async function fetchWorkshop(apiKey: string): Promise<Workshop> {
 }
 
 export async function makePayment(): Promise<boolean> {
-    const success = Math.random() > 0;
-    return new Promise(resolve => setTimeout(() => resolve(success), 1500));
+    return new Promise(resolve => setTimeout(() => resolve(true), 1500));
 }
 
 export async function bookSlot(

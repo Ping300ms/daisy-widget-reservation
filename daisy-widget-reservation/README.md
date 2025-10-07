@@ -1,7 +1,9 @@
 # Daisy – Widget de réservation
 ### Choix
 
-Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. Le CSS est externalisé par logique de séparation (le balisage doit être séparé du style qui doit etre séparé du code).
+Le widget est intégré comme un script embarqué, accompagné d’un fichier CSS séparé. Ce mode est très simple d'utilisation pour l’hôte (un simple \<script\> et un \<link\> suffisent), il ne casse pas le SEO (contrairement à un iframe qui peut être mal configuré), et il permet une meilleure continuité visuelle avec le site. L'intégration direct en JS permet également l'utilsiation de callbacks.
+Cependant on perd les avantages de l'isolation complète des iframes, notamment la simplicité de mise à jour ou l'indépendance du style.
+Le CSS est externalisé par logique de séparation (le balisage doit être séparé du style qui doit etre séparé du code).
 
 ### Gestion de la personnalisation
 
@@ -18,6 +20,7 @@ Ces variables vont pouvoir gérer:
 | --daisy-input  | Couleur de fond des inputs | 
 
 La gestion du style se fait via des variables CSS pour permettre à l'utilisateur de gérer le style depuis le CSS et donc de rester dans une logique de séparation.
+Il peut néanmoins exister des conflits de style.
 
 ### Communication avec le site hôte
 
@@ -61,13 +64,12 @@ type BookingUser = {
   phone: string;
 };
 ```
-Booking : enregistrement effectif d’une réservation. Il associe un slot, un utilisateur et un statut. Le statut peut être pending (si on voulait simuler une réservation en cours), confirmed (si le paiement a réussi) ou failed (si le paiement ou la validation échoue).
+Booking : enregistrement effectif d’une réservation. Il associe un slot et un utilisateur.
 ```js
 type Booking = {
   id: string;
   slotId: string;
   user: BookingUser;
-  status: "pending" | "confirmed" | "failed";
 };
 ```
 Les clés API (par exemple "demo-123") permettent de simuler que chaque site hôte est lié à un atelier particulier. Cela permet à daisy de par exemple savoir à quel atelier enlever des créneaux.
