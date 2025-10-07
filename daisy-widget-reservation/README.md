@@ -5,20 +5,17 @@ Le widget est intégré comme un script embarqué, accompagné d’un fichier CS
 
 ### Gestion de la personnalisation
 
-Les attributs data-* appliqués au conteneur du widget permettent de configurer rapidement un thème ou un style global.
-Ces attributs vont pouvoir gérer:
+Le widget utilise un système de variables CSS (--daisy-*) pour sa personnalisation.
+Ces variables vont pouvoir gérer:
 
-| Syntax      | Description                |
-|-------------|----------------------------|
-| data-theme  | Thème  global, peut etre "light" ou "dark" |
-| data-bg     | Couleur de fond      | 
-| data-text   | Couleur du texte     | 
-| data-accent | Couleur d'accent (boutons et prix) | 
-| data-radius | Border-radius              | 
-| data-font   | Police du texte            | 
-| data-input  | Couleur de fond des inputs | 
-
-Un Observer est mis en place pour changer a la volée le style du widget a chaque changement de data-*.
+| Syntax         | Description                |
+|----------------|----------------------------|
+| --daisy-bg     | Couleur de fond      | 
+| --daisy-text   | Couleur du texte     | 
+| --daisy-accent | Couleur d'accent (boutons et prix) | 
+| --daisy-radius | Border-radius              | 
+| --daiys-font   | Police du texte            | 
+| --daisy-input  | Couleur de fond des inputs | 
 
 ### Communication avec le site hôte
 
@@ -90,7 +87,10 @@ Le parcours utilisateur est guidé par états successifs :
 - Affichage du résultat via un composant StatusMessage, qui assure une cohérence visuelle et fonctionnelle pour tous les cas (loading, succès, erreur, créneau complet).
 
 ### Lancement du projet
-
+Pour installer les packages :
+```
+npm install
+```
 En développement :
 ```
 npm run dev

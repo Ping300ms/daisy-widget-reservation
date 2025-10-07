@@ -4,6 +4,10 @@
     --color-text: #111827;
     --color-section: #eef2ff;
     --color-accent: #4338ca;
+
+    --daisy-accent: #4f46e5;
+    --daisy-bg: #ffffff;
+    --daisy-text: #111827;
 }
 
 body.dark {
@@ -12,6 +16,11 @@ body.dark {
     --color-text: #f9fafb;
     --color-section: #111827;
     --color-accent: #6366f1;
+
+    --daisy-accent: #818cf8;
+    --daisy-bg: #1f2937;
+    --daisy-text: #f9fafb;
+    --daisy-input: #111827;
 }
 
 /* --- Reset & base --- */
