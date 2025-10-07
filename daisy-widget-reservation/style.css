@@ -1,0 +1,48 @@
+:root {
+    --color-primary: #4f46e5;
+    --color-bg: #f9fafb;
+    --color-text: #111827;
+    --color-section: #eef2ff;
+    --color-accent: #4338ca;
+
+    --daisy-accent: #4f46e5;
+    --daisy-bg: #ffffff;
+    --daisy-text: #111827;
+}
+
+body.dark {
+    --color-primary: #818cf8;
+    --color-bg: #1f2937;
+    --color-text: #f9fafb;
+    --color-section: #111827;
+    --color-accent: #6366f1;
+
+    --daisy-accent: #818cf8;
+    --daisy-bg: #1f2937;
+    --daisy-text: #f9fafb;
+    --daisy-input: #111827;
+}
+
+body {
+    background: var(--color-section);
+    color: var(--color-text);
+}
+
+.theme-toggle-dev {
+    position: fixed;
+    top: 4rem; /* en dessous du bouton principal */
+    right: 1rem;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.theme-toggle-dev:hover {
+    opacity: 0.85;
+}

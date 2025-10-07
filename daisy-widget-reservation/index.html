@@ -4,9 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>daisy-widget-reservation</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="daisy-widget" data-api-key="demo-123" data-theme="light"></div>
+    <button id="dev-theme-toggle" class="theme-toggle-dev">Toggle Dark Mode (Dev)</button>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const devToggle = document.getElementById("dev-theme-toggle");
+      const body = document.body;
+      const widget = document.getElementById("daisy-widget");
+
+      devToggle.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark");
+        widget.dataset.theme = isDark ? "dark" : "light";
+        devToggle.textContent = isDark ? "Toggle Light Mode" : "Toggle Dark Mode (Dev)";
+      });
+    </script>
   </body>
 </html>
