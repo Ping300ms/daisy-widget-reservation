@@ -8,34 +8,23 @@ import type {BookingUser, Workshop} from "../api/types";
 import useApplyTheme from "../hooks/UseApplyTheme.tsx";
 
 type BookingWidgetProps = {
+    apiKey: string;
     onSuccess? : () => undefined;
     onError? : () => undefined;
 }
 
-function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
+function BookingWidget({apiKey, onSuccess, onError} : BookingWidgetProps) {
 
     useApplyTheme("daisy-widget");
 
     const [workshop, setWorkshop] = useState<Workshop | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
     const [userData, setUserData] = useState<BookingUser | null>(null);
-    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "full">("idle");
-    const [key, setKey] = useState<string>("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "keyError" | "full">("idle");
+    const [key] = useState<string>(apiKey);
 
     useEffect(() => {
         setStatus("loading");
-
-        const container = document.querySelector("#daisy-widget") as HTMLElement | null;
-        const apiKey = container?.dataset.apiKey;
-
-        if (!apiKey) {
-            console.error("⚠️ Aucune clé API trouvée dans #daisy-widget");
-            setStatus("error");
-            return;
-        }
-
-        setKey(apiKey);
-
         fetchWorkshop(apiKey)
             .then((data) => {
                 setWorkshop(data);
@@ -43,7 +32,7 @@ function BookingWidget({onSuccess, onError} : BookingWidgetProps) {
             })
             .catch((err) => {
                 console.error("Erreur fetchWorkshop:", err);
-                setStatus("error");
+                setStatus("keyError");
             });
     }, [key]);
 

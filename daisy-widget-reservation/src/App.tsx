@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <BookingWidget/>
+      <BookingWidget apiKey="demo-123"/>
     </>
   )
 }

@@ -51,9 +51,9 @@
 
 <script src="../public/daisy-widget-reservation.js"></script>
 <script>
-    DaisyWidget.init("#daisy-widget", () => {
-        alert("✅ Réservation confirmée ! Vous recevrez un email de confirmation sous peu.");
-    });
+    DaisyWidget.init({apiKey: "demo-123",
+                      onSuccess: () => {alert("✅ Réservation confirmée ! Vous recevrez un email de confirmation sous peu.")}}
+    );
 
     const toggleBtn = document.getElementById("theme-toggle");
     toggleBtn.addEventListener("click", () => {

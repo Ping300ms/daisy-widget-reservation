@@ -2,9 +2,15 @@ import { createRoot } from "react-dom/client";
 import "../index.css";
 import BookingWidget from "../components/BookingWidget.tsx";
 
+interface DaisyWidgetInitOptions {
+    apiKey: string;
+    selector?: string;
+    onSuccess?: () => undefined;
+    onError?: () => undefined;
+}
 
 interface DaisyWidgetAPI {
-    init: (selector?: string, onSuccess?: () => undefined, onError?: () => undefined) => void;
+    init: (options: DaisyWidgetInitOptions) => void;
 }
 
 declare global {
@@ -14,11 +20,25 @@ declare global {
 }
 
 window.DaisyWidget = {
-    init: (selector = "#daisy-widget", onSuccess = () => {}, onError = () => {}) => {
+    init: ({
+               apiKey,
+               selector = "#daisy-widget",
+               onSuccess = () => {},
+               onError = () => {}
+           }: DaisyWidgetInitOptions) => {
         const container = document.querySelector<HTMLElement>(selector);
-        if (!container) return console.error("Element introuvable");
+        if (!container) {
+            console.error("Élément introuvable :", selector);
+            return;
+        }
 
         const root = createRoot(container);
-        root.render(<BookingWidget onSuccess={onSuccess} onError={onError} />);
+        root.render(
+            <BookingWidget
+                apiKey={apiKey}
+                onSuccess={onSuccess}
+                onError={onError}
+            />
+        );
     },
 };
